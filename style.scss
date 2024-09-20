@@ -1,0 +1,700 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap');
+
+// Color Palette
+$dark-gray: #2d2d2d;
+$light-gray: #3c3c3c;
+$purple: #9b59b6;
+$pink: #e91e63;
+$blue: #3498db;
+$white: #ffffff;
+$teal:#1abc9c;
+
+// Global Styles
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: $dark-gray;
+    color: $white;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+//---------------------------Navigation Bar Styling------------------------//
+header {
+    background-color: $light-gray;
+    padding: 1rem 0;
+
+    nav ul {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin: 0 1.5rem;
+
+            a {
+                position: relative;
+                color: $white;
+                text-decoration: none;
+                font-size: 1.2rem;
+                padding: 0.5rem 1rem;
+                transition: color 0.3s ease;
+
+                // Default underline (inactive)
+                &::before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: 0;
+                    height: 2px;
+                    background-color: $purple;
+                    transition: width 0.3s ease, left 0.3s ease;
+                }
+
+                // Hover effect - text color and underline
+                &:hover {
+                    color: $purple; // Text turns purple on hover
+                }
+
+                &:hover::before {
+                    width: 100%;
+                    left: 0;  // Underline expands from the center
+                }
+
+                // Active state (clicked item)
+                &.active {
+                    color: $purple;  // Keeps text color purple
+                }
+
+                &.active::before {
+                    width: 100%; // Full underline remains visible for active item
+                    left: 0;
+                }
+
+                // Hover overrides active state (prevents conflicts)
+                &:hover:not(.active) {
+                    color: $purple; // Makes hover color take priority
+                }
+            }
+        }
+    }
+}
+
+//----------------------------Home Section-----------------------------//
+.home {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 5%; // Align text to the left
+
+    .home-bg-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; // Full width of the screen
+        height: 100%; // Full height of the screen
+        object-fit: cover; // Ensures the image resizes while maintaining aspect ratio
+        object-position: center; // Default center position for larger screens
+        z-index: 0; // Ensure image is behind the text
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); // Dark overlay for better text contrast
+        z-index: 1; // Ensure overlay is above the image
+    }
+
+    .content {
+        position: relative;
+        z-index: 2; // Ensure the text is on top of both the image and overlay
+
+        h1 {
+            font-size: 4rem;
+            color: $white;
+            line-height: 1.2;
+            margin: 0;
+
+            span {
+                color: $purple;
+            }
+
+            // Animation for the h1
+            // animation: slideInLeft 1s ease-out;
+        }
+
+        p {
+            font-size: 1.5rem;
+            color: $white;
+            margin-top: 1.5rem;
+            max-width: 600px;
+            // animation: fadeIn 1.5s ease-out 0.5s backwards;
+        }
+    }
+
+    // Responsive Design for Tablets and Mobiles
+    @media (max-width: 768px) {
+        .home-bg-img {
+            object-position: right center; // Center for tablets
+        }
+
+        .content {
+            h1 {
+                font-size: 3rem; // Adjust font size for tablets
+            }
+            p {
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        .home-bg-img {
+            object-position: 60% left; // Focus on the face for mobile screens
+        }
+
+        .content {
+            h1 {
+                font-size: 2.5rem; // Adjust font size for mobile
+            }
+            p {
+                font-size: 1rem;
+            }
+        }
+    }
+}
+
+.animate-text h1 {
+    animation: slideInLeft 1s ease-out !important;
+}
+
+.animate-text p {
+    animation: fadeIn 1.5s ease-out 0.5s backwards !important;
+}
+// Animations
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+//---------------------------About Me Section-------------------------------//
+.about {
+    background-color: $dark-gray;
+    color: $white;
+    padding: 4rem 2rem;
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        text-align: center;
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: $purple; // Highlight the heading with purple
+        }
+
+        p.about-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+
+            span {
+                color: $purple; // Highlight important text in purple
+                font-weight: bold;
+            }
+        }
+    }
+    // code-inspired visual for added flair
+    .code-visual {
+        background-color: $light-gray;
+        padding: 2rem;
+        border-radius: 8px;
+        margin-top: 2rem;
+        animation: fadeInUp 1s ease-out forwards;
+
+        pre {
+            text-align: left;
+            color: $purple;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            p{
+                margin: 0px !important;
+                animation: none !important;
+                overflow: auto;
+            }
+        }
+    }
+
+    .code-visual p {
+        margin: 0; /* Ensure no margin between paragraphs */
+        padding: 0; /* Remove any padding */
+        line-height: 1.2; /* Reduce line height for smaller spacing between lines */
+        animation: fadeInUp 1s ease-out forwards;
+    }
+    
+    .code-visual pre, 
+    .code-visual code {
+        margin: 0; /* Ensure no extra margin in pre or code */
+        padding: 0; /* Remove padding */
+        line-height: 0.2; /* Reduce line height for consistency */
+        white-space: pre-wrap; /* Ensure the text wraps and doesn't overflow */
+        word-wrap: break-word; /* Break long words to prevent overflow */
+        overflow-wrap: break-word; /* For better browser support */
+    }
+
+    // Fade-in animation for the about text
+    .about-text {
+        opacity: 0;
+    }
+    // Add some space for large screens
+    @media (min-width: 1024px) {
+        .about-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+        }
+    }
+}
+
+.animate-about-text{
+    opacity: 1;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+// Keyframe for Fade-in Animation
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+//---------------------------Experience Section---------------------//
+.experience {
+    background-color: $dark-gray; /* Main background */
+    color: $white;
+    padding: 4rem 2rem;
+
+    h2 {
+        text-align: center;
+        color: $purple; /* Title in purple */
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .timeline {
+        position: relative;
+        padding: 0;
+        padding-top: 3rem;
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center the vertical line */
+
+        /* Vertical line in the center */
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: var(--timeline-height, 0); /* Dynamic height based on scroll */
+            background-color: $purple;
+            transform: translateX(-50%);
+            transition: height 0.3s ease-out; /* Smooth growth */
+        }
+    
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            width: 40%; /* Slightly wider */
+            padding: 1.5rem;
+            background-color: $light-gray;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
+    
+            /* Slide from bottom initially */
+            transform: translateY(50px);
+    
+            &.visible {
+                opacity: 1;
+                transform: translateY(0); /* Slide into place */
+            }
+    
+            h3 {
+                color: $purple;
+                font-size: 1.6rem;
+            }
+    
+            .date {
+                display: block;
+                color: $blue;
+                margin-bottom: 0.5rem;
+                font-size: 1.1rem;
+            }
+    
+            p {
+                color: $white;
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+    
+            /* Add a dot (point) in the middle of each item on the vertical line */
+            &::before {
+                content: '';
+                position: absolute;
+                left: calc(100% + 20px); /* Adjust according to padding */
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 12px;
+                height: 12px;
+                background-color: $purple;
+                border-radius: 50%;
+                z-index: 2; /* Ensure the dot is above the line */
+            }
+        }
+        
+        .bullet-points p {
+            margin-bottom: 1rem; /* Adds vertical spacing between bullet points */
+        }
+    
+        /* Left-side items */
+        .timeline-item.left {
+            align-self: flex-start; /* Align left items to the left */
+            transform: translateX(-100px); /* Initially slide from the left */
+    
+            &.visible {
+                transform: translateX(0); /* Slide into view */
+            }
+    
+            /* Adjust dot for left side */
+            &::before {
+                left: calc(-20px); /* Place the dot on the left */
+            }
+        }
+    
+        /* Right-side items */
+        .timeline-item.right {
+            align-self: flex-end; /* Align right items to the right */
+            transform: translateX(100px); /* Initially slide from the right */
+    
+            &.visible {
+                transform: translateX(0); /* Slide into view */
+            }
+    
+            /* Adjust dot for right side */
+            &::before {
+                left: calc(100% + 20px); /* Place the dot on the right */
+            }
+        }
+    
+        @media (max-width: 768px) {
+            .timeline-item {
+                width: fit-content; /* Auto size for mobile */
+                align-self: center; /* Center all items on mobile */
+            }
+    
+            &::before {
+                content: none; /* Remove the vertical line */
+            }
+        }
+    }
+    
+    
+    
+    
+}
+
+//---------------------------Projects Section---------------------//
+.projects {
+    background-color: $dark-gray; /* Dark background for contrast */
+    padding: 4rem 2rem;
+
+    h2 {
+        text-align: center;
+        color: $purple; /* Section title in purple */
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Grid layout for project cards */
+    .projects-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .project-card {
+        background-color: $light-gray;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 300px;
+        text-align: center;
+
+        /* Hover animation */
+        &:hover {
+            transform: translateY(-10px); /* Lift effect */
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-img {
+            width: 100%;
+            height: 200px; /* Dummy image height */
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+
+            h3 {
+                color: $purple; /* Project title in purple */
+                margin-bottom: 0.5rem;
+                font-size: 1.5rem;
+            }
+
+            p {
+                color: $white;
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .project-link {
+                display: inline-block;
+                margin-top: 1rem;
+                padding: 0.5rem 1rem;
+                background-color: $blue; /* Button in blue */
+                color: $white;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+            
+                /* Hover effect */
+                &:hover {
+                    background-color: darken($blue, 10%); /* Darker shade of blue */
+                    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Slight shadow for "raised" effect */
+                }
+
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .projects-grid {
+            flex-direction: column; /* Stack projects vertically on smaller screens */
+            gap: 1.5rem;
+            align-items: center;
+        }
+    }
+}
+
+.project-card {
+    opacity: 0;
+    transform: translateY(30px); /* Initially moved down */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+
+    &.visible {
+        opacity: 1;
+        transform: translateY(0); /* Slide in when visible */
+    }
+}
+
+//------------------------------ Contact Section -----------------------//
+.contact {
+    background-color: $dark-gray;
+    padding: 4rem 2rem;
+    text-align: center;
+
+    h2 {
+        color: $purple;
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+    }
+
+    p {
+        color: $white;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .contact-icons {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+
+        .contact-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: $white;
+            opacity: 0; /* Initially hidden */
+            transform: scale(0.5); /* Initially smaller */
+            transition: transform 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+
+            svg {
+                width: 80px;
+                height: 80px;
+                transition: transform 0.3s ease;
+                fill: currentColor;
+            }
+
+            span {
+                font-size: 1.2rem;
+                margin-top: 0.5rem;
+            }
+
+            &.visible {
+                opacity: 1;
+                transform: scale(1); /* Grow back to normal size */
+            }
+
+            &:hover {
+                color: $blue; /* Hover color for text and SVG */
+                svg {
+                    transform: scale(1.1); /* Enlarge icon slightly on hover */
+                }
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contact-icons {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+    }
+}
+
+//---------------------- Footer Section--------------//
+.footer {
+    background-color: $light-gray; 
+    color: $white;
+    padding: 4rem 2rem;
+    text-align: center;
+
+    .footer-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    /* Footer Navigation */
+    .footer-nav {
+        display: flex;
+        gap: 2rem;
+
+        a {
+            color: $white;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: $purple; /* Hover color change */
+            }
+        }
+    }
+
+    /* Social Media Icons */
+    .footer-social {
+        display: flex;
+        gap: 1.5rem;
+
+        a {
+            width: 40px;
+            height: 40px;
+            display: inline-block;
+            transition: transform 0.3s ease, fill 0.3s ease;
+
+            svg {
+                width: 100%;
+                height: 100%;
+                fill: $white;
+            }
+
+            &:hover {
+                transform: translateY(-5px); /* Slight lift effect on hover */
+                svg {
+                    fill: $purple; /* Change icon color on hover */
+                }
+            }
+        }
+    }
+
+    /* Contact Information */
+    .footer-contact {
+        p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+
+            a {
+                color: $white;
+                text-decoration: none;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: $purple;
+                }
+            }
+        }
+    }
+
+    /* Copyright */
+    .footer-copyright {
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.7); /* Slightly muted color */
+    }
+
+    @media (max-width: 768px) {
+        .footer-nav {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .footer-social {
+            justify-content: center;
+        }
+    }
+}
+
+
