@@ -10,6 +10,9 @@ $white: #ffffff;
 $teal:#1abc9c;
 
 // Global Styles
+html{
+    overflow-x: clip;
+}
 body {
     font-family: 'Poppins', sans-serif;
     background-color: $dark-gray;
