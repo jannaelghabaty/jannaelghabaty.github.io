@@ -30,6 +30,25 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-links');
+    const body = document.body;
+    
+    // Toggle the nav and burger animation
+    burger.addEventListener('click', () => {
+      nav.classList.toggle('nav-active');  // Show/Hide the navigation
+      burger.classList.toggle('toggle');   // Animate the burger icon
+      body.classList.toggle('menu-open');
+    });
+
+    navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          nav.classList.remove('nav-active');    // Close the menu
+          burger.classList.remove('toggle');     // Reset burger icon
+          body.classList.remove('menu-open');    // Re-enable scrolling
+        });
+      });
+    
     //---------Home Section----------------//
     const homeSection = document.querySelector('#home .content');
     const observer = new IntersectionObserver(function (entries) {
