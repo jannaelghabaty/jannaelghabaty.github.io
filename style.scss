@@ -164,7 +164,11 @@ header {
 body.menu-open {
     overflow: hidden;  // Disable scrolling
     overflow-y: hidden;
-  }
+}
+
+html.menu-open {
+    overflow: hidden;  // Disable scrolling
+}
   
 
 .burger.toggle .line:nth-child(1) {
