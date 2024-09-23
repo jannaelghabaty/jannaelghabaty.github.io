@@ -131,6 +131,10 @@ body.menu-open {
   overflow-y: hidden;
 }
 
+html.menu-open {
+  overflow: hidden;
+}
+
 .burger.toggle .line:nth-child(1) {
   transform: rotate(-45deg) translate(-5px, 6px);
 }
