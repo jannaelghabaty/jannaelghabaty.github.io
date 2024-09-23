@@ -20,67 +20,162 @@ body {
 }
 
 //---------------------------Navigation Bar Styling------------------------//
+
 header {
     background-color: $light-gray;
     padding: 1rem 0;
 
-    nav ul {
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  
+      // Navigation links (visible on large screens)
+      .nav-links {
         display: flex;
-        justify-content: center;
         list-style: none;
+        justify-content: center;
         padding: 0;
+  
+        li {
+          margin: 0 1.5rem;
+  
+          a {
+            color: $white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+  
+            &::before {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              width: 0;
+              height: 2px;
+              background-color: $purple;
+              transition: width 0.3s ease, left 0.3s ease;
+            }
+  
+            &:hover {
+              color: $purple;
+            }
+  
+            &:hover::before {
+              width: 100%;
+              left: 0;
+            }
+  
+            &.active {
+              color: $purple;
+            }
+  
+            &.active::before {
+              width: 100%;
+              left: 0;
+            }
+          }
+        }
+      }
+  
+      // Burger Icon (default hidden for large screens)
+      .burger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 25px;
+        height: 18px;
+        margin-right: 20px;
+        .line {
+          width: 100%;
+          height: 3px;
+          background-color: $white;
+          border-radius: 10px;
+          transition: all 0.3s ease;
+          margin-right: 10px;
+        }
+  
+        // Burger animation on toggle
+        &.toggle .line:nth-child(1) {
+          transform: rotate(-45deg) translate(-5px, 6px);
+        }
+  
+        &.toggle .line:nth-child(2) {
+          opacity: 0;
+        }
+  
+        &.toggle .line:nth-child(3) {
+          transform: rotate(45deg) translate(-5px, -6px);
+        }
+      }
+    }
+  }
+  
+  // Responsive styles for small screens
+  @media (max-width: 768px) {
+    nav {
+      position: relative; // Ensure the navigation is positioned relative to the header
+      justify-content: flex-end !important;
+
+      .nav-links {
+        display: none;  // Hide the nav-links by default on small screens
+        flex-direction: column;
+        justify-content: space-evenly !important;
+        align-items: flex-start !important;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;  // Full screen height
+        background-color: $light-gray;
+        z-index: 999;  // Make sure it's above other content
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(100%); 
 
         li {
-            margin: 0 1.5rem;
-
-            a {
-                position: relative;
-                color: $white;
-                text-decoration: none;
-                font-size: 1.2rem;
-                padding: 0.5rem 1rem;
-                transition: color 0.3s ease;
-
-                // Default underline (inactive)
-                &::before {
-                    content: '';
-                    position: absolute;
-                    bottom: 0;
-                    left: 50%;
-                    width: 0;
-                    height: 2px;
-                    background-color: $purple;
-                    transition: width 0.3s ease, left 0.3s ease;
-                }
-
-                // Hover effect - text color and underline
-                &:hover {
-                    color: $purple; // Text turns purple on hover
-                }
-
-                &:hover::before {
-                    width: 100%;
-                    left: 0;  // Underline expands from the center
-                }
-
-                // Active state (clicked item)
-                &.active {
-                    color: $purple;  // Keeps text color purple
-                }
-
-                &.active::before {
-                    width: 100%; // Full underline remains visible for active item
-                    left: 0;
-                }
-
-                // Hover overrides active state (prevents conflicts)
-                &:hover:not(.active) {
-                    color: $purple; // Makes hover color take priority
-                }
-            }
+          margin: 2rem 0;  // Add more space between links
+          a {
+            font-size: 2rem;  // Larger font size for better accessibility on mobile
+          }
         }
+        opacity: 0;
+      }
+  
+      .nav-active {
+        display: flex !important;
+        transform: translateX(0); 
+        opacity: 1;
+
+      }
+  
+      .burger {
+        display: flex !important;  // Show the burger icon on small screens
+        z-index: 1000;  // Ensure the burger icon is above the nav
+      }
     }
+  }
+  
+body.menu-open {
+    overflow: hidden;  // Disable scrolling
+    overflow-y: hidden;
+  }
+  
+
+.burger.toggle .line:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
 }
+
+.burger.toggle .line:nth-child(2) {
+    opacity: 0;
+}
+
+.burger.toggle .line:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
 
 //----------------------------Home Section-----------------------------//
 .home {
